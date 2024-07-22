@@ -1,0 +1,17 @@
+POST http://localhost:8081/getDiscounts HTTP/1.1
+Content-Type: application/json
+
+[{
+  "name": "Transaction #002",
+  "cardType": "VISA",
+  "cardBlocked": true,
+  "discountPercentage": 6,
+  "priceDollars": 6000
+},
+  {
+    "name": "Transaction #003",
+    "cardType": "MASTERCARD",
+    "cardBlocked": false,
+    "discountPercentage": 10,
+    "priceDollars": 10000
+  }]

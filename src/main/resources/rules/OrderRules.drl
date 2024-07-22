@@ -1,0 +1,37 @@
+package rules;
+
+import com.example.card_payment.OrderEntity;
+
+dialect  "mvel"
+
+rule "BLOCKED_CARD"
+    when
+       orderObject: OrderEntity(cardBlocked)
+    then
+        System.out.println("CARD is blocked! Please, report it to local authorities!");
+        orderObject.setOrderCancelled(true);
+end;
+
+rule "MASTERCARD"
+    when
+        orderObject: OrderEntity(cardType == "MASTERCARD" && priceDollars > 10000)
+    then
+        System.out.println("MASTERCARD discount has been added");
+        orderObject.setDiscountPercentage(20);
+end;
+
+rule "VISA"
+    when
+        orderObject: OrderEntity(cardType == "VISA" && priceDollars > 5000)
+    then
+        System.out.println("VISA discount has been added");
+        orderObject.setDiscountPercentage(14);
+end;
+
+rule "RUPAY"
+    when
+        orderObject: OrderEntity(cardType == "RUPAY" && priceDollars > 3000)
+    then
+        System.out.println("RUPAY discount has been added");
+        orderObject.setDiscountPercentage(20);
+end;
